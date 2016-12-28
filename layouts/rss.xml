@@ -1,0 +1,24 @@
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/">
+
+	<channel>
+		<title>Rice, Spice, and Whine</title>
+		<description>{{ .Description }}</description>
+		<itunes:author>Eric, Ian, and Kellen</itunes:author>
+		<link>{{ .Permalink }}</link>
+		<itunes:image href="http://kingofwallpapers.com/porpoise/porpoise-004.jpg" />
+		<pubDate>Tue, 27 Dec 2016 21:00:00 PST</pubDate>
+		<language>en-us</language>
+		<copyright>Copyright 2016 Rice, Spice, Whine</copyright>
+		{{ range $name, $page := .Site.Pages }}
+		{{ if eq .Type "ep" }}
+		<item>
+			<title>{{ $page.Title }}</title>
+			<description>{{ $page.Content }}</description>
+			<itunes:author>Rice, Spice, and Whine</itunes:author>
+			<pubDate>{{ $page.Date.Format "Thu, 16 Jun 2005" }}</pubDate>
+			<enclosure url="{{ $page.Params.sourcefile }}" length="{{ $page.Params.length }}" type="audio/mpeg" />
+		</item>
+		{{ end }}
+		{{ end }}
+	</channel>
+</rss>
